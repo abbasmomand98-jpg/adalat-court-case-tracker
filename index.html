@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adalat — Court Case Tracker &amp; Lawyer Finder (UX Concept)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">A</span> Adalat</div>
+  <p class="tagline">Know your case. Never miss a hearing. — Court case tracker &amp; lawyer finder for Pakistan</p>
+  <p class="sample-note">SAMPLE DATA — every case, lawyer, fee, figure and person shown here is invented for this UX concept demo. These are NOT real court records. Adalat is an unofficial concept: always check the case number with the court and the lawyer's standing with the bar council before you act on it.</p>
+</header>
+
+<nav class="tabs" aria-label="Adalat sections">
+  <button id="tab-cases" class="tab-btn active" data-tab="cases">My Cases</button>
+  <button id="tab-detail" class="tab-btn" data-tab="detail">Case Detail</button>
+  <button id="tab-lawyers" class="tab-btn" data-tab="lawyers">Lawyer Finder</button>
+  <button id="tab-ledger" class="tab-btn" data-tab="ledger">Cost Ledger</button>
+  <button id="tab-spotter" class="tab-btn" data-tab="spotter">Fee Spotter</button>
+</nav>
+
+<main>
+  <!-- Case board -->
+  <section class="card" id="section-cases">
+    <p class="eyebrow">CASE BOARD</p>
+    <h2>Know your case. Never miss a hearing.</h2>
+    <p class="hint">Pakistan's courts carry about 2.3 million pending cases. Ahmed Raza, 42, Rawalpindi, has an inherited-property case pending 3 years — he missed one hearing when the date changed without notice and paid Rs 15,000 per hearing with no receipts. Adalat tracks every case by its number: the next hearing, the stage, and a countdown — so no date ever moves without you knowing.</p>
+    <div class="verify-row">
+      <label>Search by case number
+        <input id="search-input" type="text" placeholder="Try 1284/2024, 342/2025 or 78/2025">
+      </label>
+      <label>City
+        <select id="city-filter">
+          <option value="all">All cities</option>
+          <option value="Lahore">Lahore</option>
+          <option value="Peshawar">Peshawar</option>
+          <option value="Karachi">Karachi</option>
+          <option value="Islamabad">Islamabad</option>
+        </select>
+      </label>
+      <button id="search-btn">Search case</button>
+    </div>
+    <div id="search-result"></div>
+    <div id="case-list"></div>
+    <p id="case-summary"></p>
+    <h3>Hearing alerts</h3>
+    <p class="hint">Alerts fire 2 days before each hearing and again on the morning. Switch any case off here — your choices are saved on this device.</p>
+    <div id="alerts-list"></div>
+    <h3>Your saved cases</h3>
+    <div id="saved-list"></div>
+  </section>
+
+  <!-- Case detail -->
+  <section class="card" id="section-detail" style="display:none">
+    <p class="eyebrow">CASE DETAIL</p>
+    <h2>What happened — in plain Urdu.</h2>
+    <p class="hint">Pick a case to see its hearing timeline, the plain-Urdu summary of what happened, and the countdown to the next hearing. No legal jargon — just what a litigant needs to know before the next date.</p>
+    <div class="verify-row">
+      <label>Choose a case
+        <select id="case-select">
+          <option value="civil-1284-2024">Civil Suit 1284/2024 — Lahore High Court</option>
+          <option value="family-342-2025">Family Suit 342/2025 — Family Court, Peshawar</option>
+          <option value="criminal-78-2025">Criminal Case 78/2025 — District &amp; Sessions Court, Karachi</option>
+          <option value="rent-56-2026">Rent Case 56/2026 — Rent Controller, Islamabad</option>
+        </select>
+      </label>
+    </div>
+    <div id="detail-box"></div>
+  </section>
+
+  <!-- Lawyer finder -->
+  <section class="card" id="section-lawyers" style="display:none">
+    <p class="eyebrow">LAWYER FINDER</p>
+    <h2>Find a verified lawyer.</h2>
+    <p class="hint">Six verified lawyers, each with a per-hearing fee in rupees — no "call for price", no hidden charges. Advocate Ayesha Khan, family law in Lahore, charges Rs 8,000 a hearing; Advocate Usman Tariq, civil and corporate in Islamabad, charges Rs 15,000. Search by name or specialty, filter by city and case type, sort by fee.</p>
+    <div class="verify-row">
+      <label>Search lawyers
+        <input id="lawyer-search" type="text" placeholder="Try Ayesha, Bilal, family or criminal">
+      </label>
+      <label>City
+        <select id="lawyer-city-filter">
+          <option value="all">All cities</option>
+          <option value="Lahore">Lahore</option>
+          <option value="Rawalpindi">Rawalpindi</option>
+          <option value="Karachi">Karachi</option>
+          <option value="Islamabad">Islamabad</option>
+          <option value="Peshawar">Peshawar</option>
+        </select>
+      </label>
+      <label>Case type
+        <select id="lawyer-type-filter">
+          <option value="all">All types</option>
+          <option value="family">Family law</option>
+          <option value="property">Property</option>
+          <option value="criminal">Criminal</option>
+          <option value="civil">Civil</option>
+        </select>
+      </label>
+      <label>Sort by
+        <select id="lawyer-sort">
+          <option value="fee">Fee — cheapest first</option>
+          <option value="rating">Rating — highest first</option>
+          <option value="years">Experience — most first</option>
+        </select>
+      </label>
+    </div>
+    <div id="lawyer-list"></div>
+    <p id="lawyer-summary"></p>
+  </section>
+
+  <!-- Cost ledger -->
+  <section class="card" id="section-ledger" style="display:none">
+    <p class="eyebrow">COST LEDGER</p>
+    <h2>A receipt for every rupee.</h2>
+    <p class="hint">Civil Suit 1284/2024 has cost Rs 87,500 across 9 hearings against a Rs 75,000 estimate — Rs 12,500 over. Lawyer fees are Rs 72,000 (9 hearings × Rs 8,000). The official court fee is Rs 500. But Rs 10,000 of "misc facilitation" has no receipt — Adalat flags it, so you can ask for the receipt before you pay it again.</p>
+    <div id="ledger-total-box"></div>
+    <div id="ledger-list"></div>
+  </section>
+
+  <!-- Fee spotter quiz -->
+  <section class="card" id="section-spotter" style="display:none">
+    <p class="eyebrow">FEE SPOTTER</p>
+    <h2>Spot the fee traps.</h2>
+    <p class="hint">Three things a lawyer does that should stop you hiring him — and one safe habit. A full fee upfront in cash with no written agreement; a "guaranteed win" promise; and a Rs 5,000 "court fee" when the official fee is Rs 500. Call each one a red flag or safe, then check your score.</p>
+    <div id="spotter-quiz"></div>
+    <button id="spotter-btn">Check my score</button>
+    <div id="spotter-result"></div>
+  </section>
+
+  <button id="reset-demo" class="secondary">Reset demo data</button>
+</main>
+
+<footer>
+  <p>Adalat is an unofficial UX concept by Muhammad Abbas Khan — not a court app. All cases, lawyers and fees are sample data.</p>
+  <p>Available for new projects: abbasmomand98@gmail.com</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
